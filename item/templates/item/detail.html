@@ -5,9 +5,42 @@
 {% endblock %}
 
 {% block content %}
-        <div class="col mx-auto">
-            <h1 class="mb-5 text-center">{{ item.name }}</h1>
-            <img src="{{ item.image.url }}" class="rounded" alt="{{ item.name }}">
-            <strong class="h3 mt-3">Price: {{ item.price }}$</strong>
+    <div class="col mx-auto">
+        <h1 class="mb-5 text-center">{{ item.name }}</h1>
+        <img src="{{ item.image.url }}" class="rounded" alt="{{ item.name }}">
+        <br>
+        <strong class="h3 my-3  text-secondary">Price: {{ item.price }}$</strong>
+        <p class=" text-secondary my-3 h3">Seller - {{ item.created_by.username }}</p>
+        {% if item.description %}
+            <p class="text-secondary h4">Description: {{ item.description }}</p>
+        {% endif %}
+        <h4 class="text-secondary mt-3">Category - {{ item.category }}</h4>
+
+        {% if request.user == item.created_by %}
+            <div class="mt-3 bg-white rounded">
+                <a href="{% url 'item:edit' item.id %}" class="btn btn-info font-semibold">Edit this item</a>
+                <a href="{% url 'item:delete' item.id %}" class="btn btn-danger font-semibold">Delete this item</a>
+            </div>
+        {% else %}
+            <a href="{% url 'conversation:new' item.id %}" class="btn btn-success mt-3 px-5 py-3 font-semibold rounded">Contact a seller</a>
+        {% endif %}
+    </div>
+    <div class="mt-5 px-5 py-5  rounded">
+        <h2 class="mb-5 text-center">You also may like</h2>
+        <div class="row row-cols-3 text-center">
+            {% for item in related_items %}
+                <div class="card col mx-3 my-5" style="width: 18rem;">
+                    <a href="{% url 'item:detail' item.id %}">
+                        <img class="card-img-top" src="{{ item.image.url }}" alt="Image" width="100%">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <h6>Price: {{ item.price }}$</h6>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
         </div>
+    </div>
 {% endblock %}

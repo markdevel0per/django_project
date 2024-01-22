@@ -8,32 +8,15 @@
 {% block content %}
     <div class="mt-5 px-5 py-5  rounded">
         <h2 class="mb-5 text-center">Newest items</h2>
-        <div class="row mx-auto">
+        <div class="row row-cols-3 text-center mx-auto">
             {% for item in items %}
-                <div class="card col mx-5" style="width: 18rem;">
+                <div class="card col mx-3 my-5" style="width: 18rem;">
                     <a href="{% url 'item:detail' item.id %}">
                         <img class="card-img-top" src="{{ item.image.url }}" alt="Image" width="100%">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.description }}</p>
                             <h6>Price: {{ item.price }}$</h6>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-
-        </div>
-    </div>
-    <div class="mt-5 px-5 py-5  rounded">
-        <h2 class="mb-5 text-center">Categories</h2>
-        <div class="row mx-auto">
-            {% for category in categories %}
-                <div class="card col mx-5" style="width: 18rem;">
-                    <a href="#">
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ category.name }}</h5>
-                            <h6>{{ category.items.count }} items</h6>
                         </div>
                     </a>
                 </div>

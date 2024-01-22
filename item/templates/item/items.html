@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Items
+{% endblock %}
+
+{% block content %}
+    <div class="row bg-secondary">
+        <div class="col-md-3 mt-5">
+            <form action="{% url 'item:items' %}">
+                <label>
+                    <input name="query" class="py-4 px-5 border rounded" type="text" value="{{ query }}"
+                           placeholder="find whatever you want...">
+                    <button class="mt-2 py-2 px-4 btn-success btn">Search</button>
+                </label>
+            </form>
+            <hr class="mb-3">
+            <p class="font-semibold h2">Categories</p>
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 rounded h4 {% if category.id == category_id %}bg-info {% endif %} ">
+                        <a href="{% url 'item:items' %}?={{ query }}&category={{ category.id }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr class="mb-3">
+            <p class="font-semibold h2">Clear filters</p>
+            <a href="{% url 'item:items' %}" class="btn btn-warning mb-5">Clear them</a>
+
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                {% for item in items %}
+                    <div class="card col-md-6 mx-5 my-5" style="width: 18rem;">
+                        <a href="{% url 'item:detail' item.id %}">
+                            <img class="card-img-top" src="{{ item.image.url }}" alt="Image" width="100%">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">{{ item.description }}</p>
+                                <h6>Price: {{ item.price }}$</h6>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
