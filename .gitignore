@@ -1,5 +1,5 @@
-prod_settings.py
-venv
-media
-config
-logs
+store/prod_settings.py
+/venv
+/media
+/config
+/logs
