@@ -6,7 +6,7 @@ from .forms import SignUpForm
 
 
 def index(request):
-    items = Item.objects.filter(is_sold=False)[:6]
+    items = Item.objects.filter(is_sold=False).ordered_by('-created_at')[:6]
     categories = Category.objects.all()[:5]
     context = {
         'categories': categories,
