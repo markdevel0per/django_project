@@ -14,6 +14,21 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = 'django-insecure--7r3074wbjj0kfydml3(9tf(fcc1qj)lk69w*k)!mph9)i_i$-'
+
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -115,7 +130,3 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    from .local_settings import *
-except ImportError:
-    from .prod_settings import *
