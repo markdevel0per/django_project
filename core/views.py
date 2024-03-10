@@ -24,7 +24,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('')
+            return redirect('/items/new/')
     else:
         form = SignUpForm()
     return render(request, 'core/signup.html', {"form": form})
